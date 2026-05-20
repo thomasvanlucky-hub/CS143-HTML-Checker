@@ -14,7 +14,7 @@ public class HTMLManager {
       }
    }
    
-   private Queue<HTMLTag> getTags() { 
+   public Queue<HTMLTag> getTags() { 
       return this.tags;
    }
    
@@ -31,8 +31,17 @@ public class HTMLManager {
       return result;
    }
    
-   private void fixHTML() {
+   public void fixHTML() {
       Stack<HTMLTag> stack = new Stack<>();
-      
+      Queue<HTMLTag> fixedHTML = new LinkedList<>();
+      int size = tags.size();
+            
+      for(int i = 0; i < size; i++) {
+         HTMLTag tag = tags.remove();
+         
+         if(tag.isSelfClosing()) {
+            fixedHTML.add(tag);
+         } 
+      }
    }
 }
