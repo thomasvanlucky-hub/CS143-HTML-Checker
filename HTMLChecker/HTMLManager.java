@@ -18,5 +18,16 @@ public class HTMLManager {
       return this.tags;
    }
    
-   
+   public String toString() {
+      String result = "";
+      int size = tags.size();
+      
+      for(int i = 0; i < size; i++) {
+         HTMLTag tag = tags.remove();
+         result = tag.toString().trim();
+         tags.add(tag);
+      }
+      
+      return result;
+   }
 }
