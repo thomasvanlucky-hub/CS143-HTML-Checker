@@ -41,7 +41,25 @@ public class HTMLManager {
          
          if(tag.isSelfClosing()) {
             fixedHTML.add(tag);
-         } 
+         } else if(tag.isOpening()) {
+            fixedHTML.add(tag);
+            stack.push(tag);
+         } else if(tag.isClosing()) {
+            if(!stack.isEmpty() && stack.peek().matches(tag)) {
+               fixedHTML.add(tag);
+               stack.pop();
+            } else if(!stack.isEmpty() && !stack.peek().matches(tag)) {
+               fixedHTML.add(stack.pop().getMatching());
+               fixedHTML.add(tag);
+               size++;
+            } 
+         }
+         
+         while(!stack.isEmpty()) {
+            fixedHTML.add(stack.pop().getMatching());
+         }
       }
+      
+      this.tags = fixedHTML;
    }
 }
