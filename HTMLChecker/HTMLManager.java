@@ -13,4 +13,10 @@ public class HTMLManager {
          }
       }
    }
+   
+   private Queue<HTMLTag> getTags() { 
+      return this.tags;
+   }
+   
+   
 }
