@@ -30,4 +30,9 @@ public class HTMLManager {
       
       return result;
    }
+   
+   private void fixHTML() {
+      Stack<HTMLTag> stack = new Stack<>();
+      
+   }
 }
