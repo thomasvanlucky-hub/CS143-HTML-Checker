@@ -7,9 +7,9 @@ public class HTMLManager {
       if(html == null) {
          throw new IllegalArgumentException();
       } else {
-         this.html = new LinkedList<>();
-         for(HTMLTag tag : html) {
-            this.html.add(tag);
+         this.tags = new LinkedList<>();
+         for(HTMLTag tag : tags) {
+            this.tags.add(tag);
          }
       }
    }
