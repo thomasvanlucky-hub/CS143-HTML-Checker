@@ -24,7 +24,7 @@ public class HTMLManager {
       
       for(int i = 0; i < size; i++) {
          HTMLTag tag = tags.remove();
-         result = tag.toString().trim();
+         result += tag.toString().trim();
          tags.add(tag);
       }
       
@@ -34,9 +34,8 @@ public class HTMLManager {
    public void fixHTML() {
       Stack<HTMLTag> stack = new Stack<>();
       Queue<HTMLTag> fixedHTML = new LinkedList<>();
-      int size = tags.size();
             
-      for(int i = 0; i < size; i++) {
+      while(!tags.isEmpty()) {
          HTMLTag tag = tags.remove();
          
          if(tag.isSelfClosing()) {
@@ -50,14 +49,13 @@ public class HTMLManager {
                stack.pop();
             } else if(!stack.isEmpty() && !stack.peek().matches(tag)) {
                fixedHTML.add(stack.pop().getMatching());
-               fixedHTML.add(tag);
-               size++;
+               tags.add(tag);
             } 
          }
-         
-         while(!stack.isEmpty()) {
-            fixedHTML.add(stack.pop().getMatching());
-         }
+      }
+      
+      while(!stack.isEmpty()) {
+         fixedHTML.add(stack.pop().getMatching());
       }
       
       this.tags = fixedHTML;
